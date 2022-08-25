@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 
 var SELECTEDCATEGORY = "*";
@@ -41,22 +41,40 @@ export default function App() {
       votes: 0,
     },
   ];
+  
+  
+  const [dblist, setSite] = useState(db);
+  
+  function makeGenre(list) {
+    // filters and make category list
+    // make a set to contain genries with no duplicates
+    let genreList = new Set();
+    
+    list.forEach((el) => {
+      genreList.add(el.category);
+    });
 
-  const [dblist, setItem] = useState(db);
-
-  function handleCat(e) {
-    SELECTEDCATEGORY = e.target.value
+    // Turn the set to a list
+    genreList = [...genreList]
+    
+    return genreList
   }
+  const [genries, _setGenre] = useState(makeGenre(dblist));
+
+  function handleChange(e) {
+    setSite()
+  }
+
   return (
     <main>
       <table>
         <thead>
           <tr>
             <th id="cate">
-              <select name="category" id="category" onChange={handleCat}>
+              <select name="category" id="category">
                 {/* // display filterd category options */}
                 <option value="*">Category</option>
-                <SelectCate props={dblist} />
+                <SelectCate props={genries} handleChange={handleChange}/>
               </select>
             </th>
             <th id="name">Name</th>
@@ -72,16 +90,10 @@ export default function App() {
   );
 }
 
-function SelectCate({ props }) {
-  // filters and make category options
-  const histDict = [];
-
-  props.forEach((el) => {
-    if (!(el.category in histDict)) histDict.push({ category: el.category });
-  });
-
-  return histDict.map((el) => {
-    return <option value={el.category}>{el.category}</option>;
+function SelectCate({ props, handleChange }) {
+  // Display categories as options and the logic
+  return props.map((category) => {
+    return <option key={category} value={category} onClick={handleChange}>{category}</option>;
   });
 }
 
@@ -97,8 +109,8 @@ function Tray({ props }) {
           </td>
           <td>{el.description}</td>
           <td>{el.votes}</td>
-          <button>UP</button>
-          <button>Down</button>
+          <td><button>UP</button></td>
+          <td><button>Down</button></td>
         </tr>
       );
     } else return <p> The Category doesn't match or the list is empty </p>
