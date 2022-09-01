@@ -1,75 +1,10 @@
 import { useState } from "react";
 import "./App.css";
+import { db } from "./Data.js";
 
 var SELECTEDCATEGORY = "*";
 
 export default function App() {
-  const db = [
-    {
-      name: "google",
-      link: "http://www.google.com",
-      description: "The One Search Engine",
-      category: "Google",
-      votes: 0,
-    },
-    {
-      name: "youtube",
-      link: "http://www.youtube.com",
-      description: "The One Video Hub",
-      category: "Google",
-      votes: 0,
-    },
-    {
-      name: "GitHub",
-      link: "http://www.google.com",
-      description: "The One Search Engine",
-      category: "Programming",
-      votes: 0,
-    },
-    {
-      name: "FreeCodeCamp",
-      link: "http://www.youtube.com",
-      description: "The One Video Hub",
-      category: "Programming",
-      votes: 0,
-    },
-    {
-      name: "SoloLearn",
-      link: "http://www.google.com",
-      description: "The One Search Engine",
-      category: "Programming",
-      votes: 0,
-    },
-    {
-      name: "W3SChool",
-      link: "http://www.w3schools.com",
-      description: "The CS Dictionary",
-      category: "Programming",
-      votes: 0,
-    },
-    {
-      name: "Vscode+",
-      link: "http://code.visualstudio.com/",
-      description: "VScode",
-      category: "Programming",
-      votes: 0,
-    },
-    {
-      name: "Reddit",
-      link: "http://www.reddit.com",
-      description: "Reddit",
-      category: "Social",
-      votes: 0,
-    },
-    {
-      name: "FaceBook",
-      link: "http://www.facebook.com",
-      description: "Reddit",
-      category: "The one Social platform",
-      votes: 0,
-    },
-  ];
-  
   function makeGenre(list) {
     // filters and make category list
     // make a set to contain genries with no duplicates
@@ -144,8 +79,8 @@ function Tray({ props }) {
           </td>
           <td>{description}</td>
           <td>{votes}</td>
-          <td><button>UP</button></td>
-          <td><button>Down</button></td>
+          <td class="btv"><button>UP</button></td>
+          <td class="btv"><button>Down</button></td>
         </tr>
       );
   });
