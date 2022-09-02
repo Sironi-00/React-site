@@ -35,7 +35,16 @@ export default function App() {
     SELECTEDCATEGORY =  e.target.value
     setSite(categoryList(db))
   }
-
+  const handleVote =(votes)=> {
+    // Handle Upvote
+    // get element by id 
+    dblist.forEach(el=>{
+      if (el.name==e.name) el.votes++;
+    })
+    console.log("Feature Coming soon")
+    
+  }
+  
   return (
     <main>
       <table>
@@ -54,7 +63,7 @@ export default function App() {
           </tr>
         </thead>
         <tbody>
-          <Tray props={dblist} />
+          <Tray props={dblist} handleVote={handleVote} />
         </tbody>
       </table>
     </main>
@@ -68,7 +77,7 @@ function SelectCate({ props, handleChange }) {
   });
 }
 
-function Tray({ props }) {
+function Tray({ props, handleVote }) {
   // Adds and display site to the table
   return props.map(({name, category, link, votes, description}) => {
       return (
@@ -79,8 +88,8 @@ function Tray({ props }) {
           </td>
           <td>{description}</td>
           <td>{votes}</td>
-          <td class="btv"><button>UP</button></td>
-          <td class="btv"><button>Down</button></td>
+          <td className="btv" value="Press" onClick={()=>{handleVote(votes)}}><button>UP</button></td>
+          <td className="btv"><button>Down</button></td>
         </tr>
       );
   });
