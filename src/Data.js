@@ -62,5 +62,12 @@ const db = [
       category: "Social",
       votes: 0,
     },
+    {
+      name: "Tor Browser",
+      link: "https://www.torproject.org",
+      description: "For Internet privacy n Access to ISP restricted sites",
+      category: "Internet",
+      votes: 0,
+    }
   ];
   export {db}
